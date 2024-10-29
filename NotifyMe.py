@@ -9,7 +9,7 @@ import subprocess
 import random
 
 VERBOSE = False  # Set to True for detailed output, False to suppress
-message_counter = 0  # Initialize message counter
+message_counter = 0  # Initialize message counter for total messages
 
 def log(message):
     """Prints a message only if VERBOSE mode is enabled."""
