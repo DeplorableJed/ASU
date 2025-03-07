@@ -124,11 +124,11 @@ def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers)
 
 def main():
     """Runs the class availability checker in a continuous loop."""
-    subject = input("Enter the subject code (e.g., MAT) [default: MAT]: ").strip() or "MAT"
-    catalog_nbr = input("Enter the catalog number (e.g., 267) [default: 267]: ").strip() or "267"
+    subject = input("Enter the subject code (e.g., MAT) [default: MAT]: ").strip() or "PHY"
+    catalog_nbr = input("Enter the catalog number (e.g., 267) [default: 267]: ").strip() or "131"
     highlight_class_numbers = input(
         "Enter the class numbers to highlight (comma-separated NO spaces) [default: 14101]: "
-    ).strip() or "14101"
+    ).strip() or "61694"
     highlight_class_numbers = highlight_class_numbers.split(",")  # Split into a list
     phone_numbers = input(
         "Enter the + format phone numbers to notify (comma-separated NO spaces) [default: +12065658179]: "
