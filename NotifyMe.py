@@ -68,7 +68,7 @@ def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers)
         base_url = "https://catalog.apps.asu.edu/catalog/classes/classlist"
         params = (
             f"?campus=TEMPE&campusOrOnlineSelection=A&catalogNbr={catalog_nbr}"
-            f"&honors=F&promod=F&searchType=all&subject={subject}&term=2251"
+            f"&honors=F&promod=F&searchType=all&subject={subject}&term=2257"
         )
         full_url = base_url + params
 
@@ -124,14 +124,14 @@ def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers)
 
 def main():
     """Runs the class availability checker in a continuous loop."""
-    subject = input("Enter the subject code (e.g., MAT) [default: MAT]: ").strip() or "PHY"
-    catalog_nbr = input("Enter the catalog number (e.g., 267) [default: 267]: ").strip() or "131"
+    subject = input("Enter the subject code (e.g., PHY) [default: PHY]: ").strip() or "PHY"
+    catalog_nbr = input("Enter the catalog number (e.g., 131) [default: 131]: ").strip() or "131"
     highlight_class_numbers = input(
         "Enter the class numbers to highlight (comma-separated NO spaces) [default: 14101]: "
     ).strip() or "61694"
     highlight_class_numbers = highlight_class_numbers.split(",")  # Split into a list
     phone_numbers = input(
-        "Enter the + format phone numbers to notify (comma-separated NO spaces) [default: +12065658179]: "
+        "Enter the + format phone numbers to notify (comma-separated NO spaces) [default: +12065658179,+12066837599]: "
     ).strip() or "+12065658179,+12066837599"
     phone_numbers = phone_numbers.split(",")  # Split into a list
 
