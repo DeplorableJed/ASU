@@ -53,7 +53,7 @@ def highlight_text(text):
     """Wraps the given text with ANSI escape codes to highlight it."""
     return f"\033[93m{text}\033[0m"  # ANSI yellow
 
-def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers):
+def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers, term):
     """Fetches the class list and sends notifications if seats are available."""
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -67,8 +67,8 @@ def get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers)
 
         base_url = "https://catalog.apps.asu.edu/catalog/classes/classlist"
         params = (
-            f"?campus=TEMPE&campusOrOnlineSelection=A&catalogNbr={catalog_nbr}"
-            f"&honors=F&promod=F&searchType=all&subject={subject}&term=2257"
+            f"?campus=ICOURSE%2CTEMPE&campusOrOnlineSelection=A&catalogNbr={catalog_nbr}"
+            f"&honors=F&promod=F&searchType=all&subject={subject}&term={term}"
         )
         full_url = base_url + params
 
@@ -126,8 +126,9 @@ def main():
     """Runs the class availability checker in a continuous loop."""
     subject = input("Enter the subject code (e.g., PHY) [default: PHY]: ").strip() or "PHY"
     catalog_nbr = input("Enter the catalog number (e.g., 131) [default: 131]: ").strip() or "131"
+    term = input("Enter the term number (e.g., 2257 for Fall 2025) [default: 2257]: ").strip() or "2257"
     highlight_class_numbers = input(
-        "Enter the class numbers to highlight (comma-separated NO spaces) [default: 14101]: "
+        "Enter the class numbers to highlight (comma-separated NO spaces) [default: 61694]: "
     ).strip() or "61694"
     highlight_class_numbers = highlight_class_numbers.split(",")  # Split into a list
     phone_numbers = input(
@@ -136,10 +137,11 @@ def main():
     phone_numbers = phone_numbers.split(",")  # Split into a list
 
     print("Starting continuous monitoring... Press Ctrl+C to stop.")
+    print(f"Monitoring {subject} {catalog_nbr} for term {term}...")
 
     try:
         while True:
-            get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers)
+            get_class_list(subject, catalog_nbr, highlight_class_numbers, phone_numbers, term)
             print(f"Total messages sent so far: {message_counter}")  # Print message counter
             wait_time = random.randint(45, 60)  # Random wait between 45 and 60 seconds
             print(f"Waiting {wait_time} seconds before the next check...")
